@@ -2,8 +2,8 @@
 
 # ♠️♥️ BlackJack ♦️♣️
 
-![Menu gry](1.png)
-![Rozgrywka](2.png)
+![Menu gry](public/1.png)
+![Rozgrywka](public/2.png)
 
 ## Opis projektu  
 „Blackjack” to prosta przeglądarkowa gra karciana inspirowana klasycznym kasynowym tytułem „Blackjack”. Celem gry jest osiągnięcie sumy 21 lub jak najbliżej niej bez przekroczenia — własna strategia kontra krupier.
