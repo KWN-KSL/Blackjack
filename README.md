@@ -2,7 +2,13 @@
 
 # ♠️♥️ BlackJack ♦️♣️
 
-![Menu gry](public/1.png)
+## Menu Gry
+![Menu gry](public/Menu.png)
+
+## Rozpoczęcie gry
+![Rozpoczecie gry](public/1.png)
+
+## Przykładowa rozgrywka
 ![Rozgrywka](public/2.png)
 
 ## Opis projektu  
