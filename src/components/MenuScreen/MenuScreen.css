@@ -50,3 +50,12 @@
 .menu-button.reset:hover {
   background-color: #d32f2f;
 }
+
+.rules-button {
+  background-color: #4caf50;
+  color: white;
+}
+
+.rules-button:hover {
+  background-color: #43a047;
+}

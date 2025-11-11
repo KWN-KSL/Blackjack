@@ -8,7 +8,12 @@ import BetModal from '../BetModal/BetModal';
 
 const DEAL_ANIMATION_DELAY = 600;
 
-export default function GameScreen({ totalScore, setTotalScore, onBackToMenu, onResetScore }) {
+export default function GameScreen({
+  totalScore,
+  setTotalScore,
+  onBackToMenu,
+  onResetScore,
+}) {
   const [playerHand, setPlayerHand] = useState([]);
   const [dealerHand, setDealerHand] = useState([]);
   const [gameState, setGameState] = useState('betting');
@@ -23,10 +28,10 @@ export default function GameScreen({ totalScore, setTotalScore, onBackToMenu, on
   const playerScore = calculateScore(playerHand);
   const dealerScore = calculateScore(dealerHand);
 
-  const endGame = useCallback((finalDealerScore, finalPlayerScore) => {
+  /* ---------- ENDGAME Z BET AMOUNT ---------- */
+  const endGame = useCallback((finalDealerScore, finalPlayerScore, betAmount) => {
     if (hasEndedRef.current) return;
     hasEndedRef.current = true;
-
     setIsDealerCardFaceUp(true);
     setGameState('end');
 
@@ -35,26 +40,44 @@ export default function GameScreen({ totalScore, setTotalScore, onBackToMenu, on
 
     if (finalPlayerScore > 21) {
       result = 'Przekroczyłeś 21! Przegrałeś.';
-      outcome = -currentBet;
+      outcome = -betAmount;
     } else if (finalDealerScore > 21) {
       result = 'Dealer przekroczył 21! Wygrałeś!';
-      outcome = currentBet;
+      outcome = betAmount;
     } else if (finalPlayerScore > finalDealerScore) {
       result = 'Wygrałeś!';
-      outcome = currentBet;
+      outcome = betAmount;
     } else if (finalDealerScore > finalPlayerScore) {
       result = 'Przegrałeś! Dealer ma więcej punktów.';
-      outcome = -currentBet;
+      outcome = -betAmount;
     } else {
       result = 'Remis!';
       outcome = 0;
     }
 
     setMessage(result);
-    setTotalScore(s => s + outcome);
+    setTotalScore((s) => s + outcome);
     setLastGameResult({ outcome });
-  }, [currentBet, setTotalScore]);
+  }, [setTotalScore]);
 
+  /* ---------- ✅ NOWY useEffect: AUTO-END GRACZA ---------- */
+  useEffect(() => {
+    if (gameState !== 'playerTurn' || hasEndedRef.current) return;
+
+    // Gracz >21? BUST → przegrana
+    if (playerScore > 21) {
+      setTimeout(() => endGame(dealerScore, playerScore, currentBet), 300);
+      return;
+    }
+
+    // Gracz =21? AUTO-WYGRANA (niezależnie od dealera)
+    if (playerScore === 21) {
+      setTimeout(() => endGame(0, playerScore, currentBet), 500); // dealerScore=0 bo gracz wygrał
+      return;
+    }
+  }, [playerHand, gameState, playerScore, dealerScore, endGame, currentBet]);
+
+  /* ---------- TURNA DEALERA ---------- */
   useEffect(() => {
     if (gameState !== 'dealerTurn') return;
 
@@ -64,25 +87,34 @@ export default function GameScreen({ totalScore, setTotalScore, onBackToMenu, on
     }
 
     const dScore = calculateScore(dealerHand);
+    const pScore = playerScore;
+
+    if (pScore > 21) {
+      endGame(dScore, pScore, currentBet);
+      return;
+    }
+
     if (dScore >= 17) {
-      endGame(dScore, playerScore);
+      endGame(dScore, pScore, currentBet);
       return;
     }
 
     const timer = setTimeout(() => {
       const [newDeck, card] = dealCard(deckRef.current);
       deckRef.current = newDeck;
-      setDealerHand(h => [...h, card]);
+      setDealerHand((h) => [...h, card]);
     }, 1000);
 
     return () => clearTimeout(timer);
-  }, [gameState, dealerHand, playerScore, endGame, isDealerCardFaceUp]);
+  }, [gameState, dealerHand, playerScore, endGame, isDealerCardFaceUp, currentBet]);
 
   const startHand = useCallback((bet) => {
     hasEndedRef.current = false;
+
     const actualBet = Math.min(bet, totalScore);
     setCurrentBet(actualBet);
     setLastGameResult(null);
+
     setGameState('dealing');
     setMessage('Rozdawanie kart...');
     setPlayerHand([]);
@@ -92,10 +124,14 @@ export default function GameScreen({ totalScore, setTotalScore, onBackToMenu, on
     const newDeck = createDeck();
     deckRef.current = newDeck;
 
-    const [d1, p1] = dealCard(deckRef.current); deckRef.current = d1;
-    const [d2, d1Card] = dealCard(deckRef.current); deckRef.current = d2;
-    const [d3, p2] = dealCard(deckRef.current); deckRef.current = d3;
-    const [d4, d2Card] = dealCard(deckRef.current); deckRef.current = d4;
+    const [d1, p1] = dealCard(deckRef.current);
+    deckRef.current = d1;
+    const [d2, d1Card] = dealCard(deckRef.current);
+    deckRef.current = d2;
+    const [d3, p2] = dealCard(deckRef.current);
+    deckRef.current = d3;
+    const [d4, d2Card] = dealCard(deckRef.current);
+    deckRef.current = d4;
 
     setPlayerHand([p1, p2]);
     setDealerHand([d1Card, d2Card]);
@@ -104,8 +140,9 @@ export default function GameScreen({ totalScore, setTotalScore, onBackToMenu, on
       const pScore = calculateScore([p1, p2]);
       const dScore = calculateScore([d1Card, d2Card]);
 
+      // SPRAWDŹ TYLKO PIERWSZE 2 KARTY NA BLACKJACK
       if (pScore === 21 || dScore === 21) {
-        endGame(dScore, pScore);
+        endGame(dScore, pScore, actualBet);
       } else {
         setGameState('playerTurn');
         setMessage('Twoja kolej. Hit czy Stand?');
@@ -115,17 +152,11 @@ export default function GameScreen({ totalScore, setTotalScore, onBackToMenu, on
 
   const handleHit = useCallback(() => {
     if (gameState !== 'playerTurn' || hasEndedRef.current) return;
+
     const [newDeck, card] = dealCard(deckRef.current);
     deckRef.current = newDeck;
-    setPlayerHand(h => {
-      const newHand = [...h, card];
-      const score = calculateScore(newHand);
-      if (score > 21) {
-        setTimeout(() => endGame(dealerScore, score), 300);
-      }
-      return newHand;
-    });
-  }, [gameState, dealerScore, endGame]);
+    setPlayerHand((h) => [...h, card]); // ✅ useEffect obsłuży wynik
+  }, [gameState]);
 
   const handleStand = () => {
     if (gameState !== 'playerTurn') return;
@@ -138,7 +169,11 @@ export default function GameScreen({ totalScore, setTotalScore, onBackToMenu, on
   };
 
   const getDealerVisibleScore = () => {
-    if ((gameState === 'playerTurn' || gameState === 'dealing') && dealerHand.length > 1 && !isDealerCardFaceUp) {
+    if (
+      (gameState === 'playerTurn' || gameState === 'dealing') &&
+      dealerHand.length > 1 &&
+      !isDealerCardFaceUp
+    ) {
       return calculateScore([dealerHand[1]]);
     }
     return dealerScore;
@@ -155,17 +190,24 @@ export default function GameScreen({ totalScore, setTotalScore, onBackToMenu, on
           onResetScore={onResetScore}
         />
       )}
-
       <Header totalScore={totalScore} onBackToMenu={onBackToMenu} />
-
       <div className="blackjack-app">
         <div className="game-board">
           <div className="hand-container">
             <h2>Dealer (Wynik: {getDealerVisibleScore()})</h2>
-            <Hand hand={dealerHand} isPlayer={false} gameState={gameState} isDealerCardFaceUp={isDealerCardFaceUp} />
+            <Hand
+              hand={dealerHand}
+              isPlayer={false}
+              gameState={gameState}
+              isDealerCardFaceUp={isDealerCardFaceUp}
+            />
           </div>
 
-          <GameStatus message={message} currentBet={currentBet} gameState={gameState} />
+          <GameStatus
+            message={message}
+            currentBet={currentBet}
+            gameState={gameState}
+          />
 
           <div className="hand-container">
             <h2>Gracz (Wynik: {playerScore})</h2>
