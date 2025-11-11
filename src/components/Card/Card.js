@@ -1,4 +1,3 @@
-// src/components/Card/Card.js
 import './Card.css';
 
 export default function Card({ card, isHidden = false, isAnimated = false, delay = 0 }) {
@@ -6,13 +5,8 @@ export default function Card({ card, isHidden = false, isAnimated = false, delay
   const animationStyle = isAnimated ? { animationDelay: `${delay}ms` } : {};
 
   if (isHidden) {
-    return (
-      <div className={`card hidden ${animationClass}`} style={animationStyle}>
-        {/* Pusta karta */}
-      </div>
-    );
+    return <div className={`card hidden ${animationClass}`} style={animationStyle} />;
   }
-
   const color = card.suit === '♥' || card.suit === '♦' ? 'red' : 'black';
   return (
     <div className={`card ${color} ${animationClass}`} style={animationStyle}>

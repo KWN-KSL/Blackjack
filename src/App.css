@@ -1,5 +1,3 @@
-/* src/App.css */
-/* --- Globalne Style --- */
 * {
   box-sizing: border-box;
 }
@@ -23,15 +21,10 @@ body {
   justify-content: center;
 }
 
-/* --- Ekran Menu (teraz w MenuScreen.css) --- */
-/* Przeniesione do MenuScreen.css */
-
-/* --- Główny kontener gry --- */
 .game-container {
   width: 100%;
 }
 
-/* --- Blackjack App (kontener główny) --- */
 .blackjack-app {
   background-color: #0e593a;
   border: 2px solid rgba(0, 0, 0, 0.2);

@@ -18,7 +18,7 @@ export default function GameScreen({ totalScore, setTotalScore, onBackToMenu, on
   const [isDealerCardFaceUp, setIsDealerCardFaceUp] = useState(false);
 
   const deckRef = useRef([]);
-  const hasEndedRef = useRef(false); // zapobiega podwójnemu endGame
+  const hasEndedRef = useRef(false);
 
   const playerScore = calculateScore(playerHand);
   const dealerScore = calculateScore(dealerHand);
@@ -58,20 +58,17 @@ export default function GameScreen({ totalScore, setTotalScore, onBackToMenu, on
   useEffect(() => {
     if (gameState !== 'dealerTurn') return;
 
-    // KROK 1: ODKRYJ KARTĘ (jeśli ukryta)
     if (!isDealerCardFaceUp) {
       setIsDealerCardFaceUp(true);
       return;
     }
 
-    // KROK 2: Oceń rękę i zdecyduj
     const dScore = calculateScore(dealerHand);
     if (dScore >= 17) {
       endGame(dScore, playerScore);
       return;
     }
 
-    // KROK 3: Dobierz kartę po 1 sekundzie
     const timer = setTimeout(() => {
       const [newDeck, card] = dealCard(deckRef.current);
       deckRef.current = newDeck;

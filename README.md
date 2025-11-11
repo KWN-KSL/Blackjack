@@ -1,15 +1,14 @@
 <div align="center">
 
 # ♠️♥️ BlackJack ♦️♣️
-# Blackjack  
-<img src="logo-lub-ekran-gry.png" alt="Blackjack game screenshot" width="300">
+
+![Menu gry](1.png)
+![Rozgrywka](2.png)
 
 ## Opis projektu  
 „Blackjack” to prosta przeglądarkowa gra karciana inspirowana klasycznym kasynowym tytułem „Blackjack”. Celem gry jest osiągnięcie sumy 21 lub jak najbliżej niej bez przekroczenia — własna strategia kontra krupier.
 
 [🎮 GRAJ TERAZ](https://blackjack-kwn-ksl.vercel.app)  
-
-![BlackJack Preview](https://i.imgur.com/placeholder.png)
 
 </div>
 
@@ -37,4 +36,4 @@
    - **Mniej punktów niż krupier (≤21)** → przegrywasz zakład. ❌  
    - **Remis** → zakład zostaje zwrócony. 🤝  
 
-> 🎲 **Cel gry:** osiągnij sumę kart jak najbliższą **21**, nie przekraczając tej liczby!
+🎲 **Cel gry:** osiągnij sumę kart jak najbliższą **21**, nie przekraczając tej liczby!

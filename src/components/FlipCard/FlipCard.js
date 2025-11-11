@@ -1,4 +1,3 @@
-// src/components/FlipCard/FlipCard.js
 import Card from '../Card/Card';
 import './FlipCard.css';
 
