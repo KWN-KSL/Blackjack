@@ -1,0 +1,55 @@
+/* src/components/Card/Card.css */
+
+.card {
+  width: 75px;
+  height: 110px;
+  background-color: #fff;
+  border: 1px solid #aaa;
+  border-radius: 8px;
+  font-weight: bold;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 4px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  position: relative;
+  backface-visibility: hidden;
+  box-sizing: border-box;
+}
+
+.card.red { color: #d32f2f; }
+.card.black { color: #212121; }
+.card .value { font-size: 2.2rem; }
+.card .suit { font-size: 1.8rem; }
+
+.card.hidden {
+  background-image: linear-gradient(135deg, #424242 25%, #616161 25%, #616161 50%, #424242 50%, #424242 75%, #616161 75%, #616161 100%);
+  background-size: 40px 40px;
+  border: 2px solid #212121;
+}
+.card.hidden .value,
+.card.hidden .suit { display: none; }
+
+/* Animacja pojawienia */
+@keyframes cardAppearAnimation {
+  from { opacity: 0; transform: scale(0.7) translateY(20px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+.card.card-appear {
+  animation: cardAppearAnimation 0.5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+  opacity: 0;
+}
+
+/* Placeholder */
+.card.placeholder {
+  background-color: #555;
+  background-image: none;
+  border-color: #333;
+  opacity: 0.5;
+  animation: fadeInPlaceholder 0.5s ease-out forwards;
+}
+@keyframes fadeInPlaceholder {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 0.5; transform: scale(1); }
+}

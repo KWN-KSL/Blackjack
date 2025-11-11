@@ -1,25 +1,25 @@
-import logo from './logo.svg';
+import { useState } from 'react';
+import MenuScreen from './components/MenuScreen/MenuScreen';
+import GameScreen from './components/GameScreen/GameScreen';
+import { STARTING_SCORE } from './utils/blackjack';
 import './App.css';
 
-function App() {
+export default function App() {
+  const [screen, setScreen] = useState('menu');
+  const [totalScore, setTotalScore] = useState(STARTING_SCORE);
+
+  const handleResetScore = () => setTotalScore(STARTING_SCORE);
+
+  if (screen === 'menu') {
+    return <MenuScreen totalScore={totalScore} onPlay={() => setScreen('game')} onResetScore={handleResetScore} />;
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <GameScreen
+      totalScore={totalScore}
+      setTotalScore={setTotalScore}
+      onBackToMenu={() => setScreen('menu')}
+      onResetScore={handleResetScore}
+    />
   );
 }
-
-export default App;
