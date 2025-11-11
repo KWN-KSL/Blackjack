@@ -14,7 +14,9 @@
 ## Opis projektu  
 „Blackjack” to prosta przeglądarkowa gra karciana inspirowana klasycznym kasynowym tytułem „Blackjack”. Celem gry jest osiągnięcie sumy 21 lub jak najbliżej niej bez przekroczenia — własna strategia kontra krupier.
 
-[GRAJ TERAZ](https://blackjack-ten-bice.vercel.app "GRAJ TERAZ"){target="_blank" rel="noopener noreferrer"}
+<a href="https://blackjack-ten-bice.vercel.app" target="_blank" rel="noopener noreferrer">
+  <strong>KLIKNIJ ŻEBY ZAGRAĆ</strong>
+</a>
 
 </div>
 
