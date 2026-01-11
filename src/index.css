@@ -18,3 +18,17 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+@media (max-width: 600px) {
+  body {
+    min-height: 100vh;
+    height: auto; 
+    overflow-y: auto;
+    align-items: flex-start;
+    padding: 20px 0;
+  }
+  #root {
+    align-items: flex-start;
+    padding: 0 10px;
+  }
+}

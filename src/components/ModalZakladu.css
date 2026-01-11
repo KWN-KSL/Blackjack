@@ -273,3 +273,36 @@ h2 {
   transform: scale(0.98);
   box-shadow: none;
 }
+
+@media (max-width: 600px) {
+  .tresc-modalu {
+    padding: 15px;
+    width: 100%;
+  }
+  h2 {
+    font-size: 1.5rem;
+  }
+  .zeton {
+    width: 50px;
+    height: 50px;
+    font-size: 0.9rem;
+    border-width: 2px;
+  }
+  .strefa-zetonow {
+    gap: 8px;
+  }
+  .info-finansowe {
+    padding: 10px;
+  }
+  .info-box strong {
+    font-size: 1.4rem;
+  }
+  .akcje-zakladu {
+    gap: 8px;
+  }
+  .przycisk-modalu {
+    font-size: 0.8rem;
+    padding: 8px;
+    height: 45px;
+  }
+}

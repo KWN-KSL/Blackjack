@@ -82,3 +82,20 @@
   transform: translateY(5px);
   box-shadow: none;
 }
+
+@media (max-width: 600px) {
+  .ekran-menu {
+    padding: 20px;
+    width: 95%;
+  }
+  .ekran-menu h1 {
+    font-size: 2.5rem;
+  }
+  .ekran-menu h2 {
+    font-size: 1.5rem;
+  }
+  .przycisk-menu {
+    font-size: 1.2rem;
+    padding: 12px;
+  }
+}

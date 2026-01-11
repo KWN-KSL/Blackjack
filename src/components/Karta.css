@@ -85,3 +85,19 @@
   from { opacity: 0; transform: scale(0.9); }
   to { opacity: 0.5; transform: scale(1); }
 }
+
+@media (max-width: 600px) {
+  .karta, .karta-obrotowa, .placeholder {
+    width: 50px;
+    height: 75px;
+  }
+  .karta .wartosc {
+    font-size: 1.4rem;
+  }
+  .karta .kolor {
+    font-size: 1.2rem;
+  }
+  .karta.ukryta {
+    background-size: 25px 25px;
+  }
+}

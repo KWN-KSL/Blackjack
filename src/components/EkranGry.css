@@ -153,3 +153,50 @@
 .przycisk-nowa-runda:hover {
   background-color: #43a047 !important;
 }
+
+@media (max-width: 600px) {
+  .naglowek-gry {
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px;
+  }
+  .przycisk-naglowek {
+    font-size: 0.9rem;
+    padding: 8px 15px;
+    width: 100%;
+  }
+  .przycisk-naglowek.stop-auto-header {
+    position: relative;
+    left: auto;
+    transform: none;
+    margin-bottom: 5px;
+  }
+  .wynik-naglowek {
+    font-size: 1.4rem;
+    margin-bottom: 5px;
+  }
+  .plansza {
+    padding: 10px;
+    gap: 10px;
+  }
+  .obszar-reki {
+    min-height: 120px;
+    padding: 10px;
+  }
+  .obszar-reki h2 {
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+  }
+  .sterowanie {
+    padding: 10px;
+    gap: 8px;
+  }
+  .sterowanie button {
+    flex: 1 1 40%;
+    font-size: 0.9rem;
+    padding: 10px;
+  }
+  .wiadomosc {
+    font-size: 1rem;
+  }
+}
