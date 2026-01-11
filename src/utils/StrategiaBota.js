@@ -45,6 +45,10 @@ export function pobierzDecyzjeBota(rekaGracza, kartaKrupiera) {
       if (wartoscKrupiera >= 5 && wartoscKrupiera <= 6) return mozePodwoic ? 'double' : 'hit';
       return 'hit';
     }
+
+    if (punkty === 12) {
+      return 'hit'; 
+    }
   }
 
   if (punkty >= 17) return 'stand';
