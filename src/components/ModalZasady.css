@@ -1,4 +1,4 @@
-.modal-overlay {
+.tlo-modalu {
   position: fixed;
   top: 0; left: 0; right: 0; bottom: 0;
   background: rgba(0, 0, 0, 0.7);
@@ -8,7 +8,7 @@
   z-index: 1000;
 }
 
-.rules-modal {
+.modal-zasady {
   width: 90%;
   max-width: 1000px;
   max-height: 90vh;
@@ -21,14 +21,14 @@
   flex-direction: column;
 }
 
-.rules-header {
+.naglowek-zasad {
   padding: 20px 25px 2px 25px !important;
   background: rgba(0, 0, 0, 0.3);
   text-align: center;
   border-bottom: 1px solid #fdd835;
 }
 
-.rules-header h2 {
+.naglowek-zasad h2 {
   margin: 0;
   color: #fdd835;
   font-size: 3rem !important;
@@ -36,7 +36,7 @@
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
-.rules-content {
+.tresc-zasad {
   padding: 25px;
   flex-grow: 1;
   overflow-y: auto;
@@ -45,7 +45,7 @@
   color: #eee;
 }
 
-.rules-content pre {
+.tresc-zasad pre {
   white-space: pre-wrap;
   font-family: inherit;
   margin: 0;
@@ -54,7 +54,7 @@
   text-align: left;
 }
 
-.rules-content pre .section-title {
+.tresc-zasad pre .tytul-sekcji {
   display: block;
   text-align: center;
   font-weight: 700;
@@ -65,19 +65,19 @@
   letter-spacing: 1px;
 }
 
-.rules-content pre .section-title:not(:first-of-type) {
+.tresc-zasad pre .tytul-sekcji:not(:first-of-type) {
   border-top: 1px solid rgba(255, 255, 255, 0.2);
   padding-top: 15px;
 }
 
-.rules-footer {
+.stopka-zasad {
   padding: 20px;
   background: rgba(0, 0, 0, 0.3);
   border-top: 1px solid #fdd835;
   text-align: center;
 }
 
-.close-rules-button {
+.przycisk-zamknij {
   font-size: 1.2rem;
   font-weight: bold;
   padding: 14px 40px;
@@ -90,7 +90,7 @@
   min-width: 180px;
 }
 
-.close-rules-button:hover {
+.przycisk-zamknij:hover {
   background-color: #fbc02d;
   transform: translateY(-2px);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);

@@ -1,25 +1,38 @@
-import { useState } from 'react';
-import MenuScreen from './components/MenuScreen/MenuScreen';
-import GameScreen from './components/GameScreen/GameScreen';
-import { STARTING_SCORE } from './utils/blackjack';
+import { useState, useEffect } from 'react';
+import EkranMenu from './components/EkranMenu';
+import EkranGry from './components/EkranGry';
+import { PUNKTY_STARTOWE } from './utils/logikaGry';
 import './App.css';
 
 export default function App() {
-  const [screen, setScreen] = useState('menu');
-  const [totalScore, setTotalScore] = useState(STARTING_SCORE);
+  const [ekran, ustawEkran] = useState('menu');
+  const [saldo, ustawSaldo] = useState(() => {
+    const zapisaneSaldo = localStorage.getItem('blackjack_saldo');
+    return zapisaneSaldo !== null ? parseInt(zapisaneSaldo, 10) : PUNKTY_STARTOWE;
+  });
 
-  const handleResetScore = () => setTotalScore(STARTING_SCORE);
+  useEffect(() => {
+    localStorage.setItem('blackjack_saldo', saldo);
+  }, [saldo]);
 
-  if (screen === 'menu') {
-    return <MenuScreen totalScore={totalScore} onPlay={() => setScreen('game')} onResetScore={handleResetScore} />;
+  const resetujGre = () => ustawSaldo(PUNKTY_STARTOWE);
+
+  if (ekran === 'menu') {
+    return (
+      <EkranMenu 
+        saldo={saldo} 
+        graj={() => ustawEkran('gra')} 
+        resetuj={resetujGre} 
+      />
+    );
   }
 
   return (
-    <GameScreen
-      totalScore={totalScore}
-      setTotalScore={setTotalScore}
-      onBackToMenu={() => setScreen('menu')}
-      onResetScore={handleResetScore}
+    <EkranGry
+      saldo={saldo}
+      ustawSaldo={ustawSaldo}
+      powrotDoMenu={() => ustawEkran('menu')}
+      resetujGre={resetujGre}
     />
   );
 }

@@ -1,0 +1,84 @@
+.ekran-menu {
+  text-align: center;
+  background-color: #0e593a;
+  padding: 40px;
+  border-radius: 10px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+  width: 100%;
+  max-width: 500px;
+}
+
+.ekran-menu h1 {
+  font-size: 4rem;
+  color: #fdd835;
+  margin: 0 0 10px 0;
+  text-shadow: 2px 2px 4px #000;
+}
+
+.ekran-menu h2 {
+  font-size: 2rem;
+  font-weight: 400;
+  margin-bottom: 30px;
+  color: white;
+}
+
+.przycisk-menu {
+  font-size: 1.5rem;
+  font-weight: bold;
+  padding: 15px 40px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  color: #0e593a;
+  display: block;
+  width: 100%;
+  margin-top: 20px;
+  transition: all 0.1s ease;
+  position: relative;
+  
+  background-color: #fdd835;
+  box-shadow: 0 5px 0 #f9a825;
+}
+
+.przycisk-menu:hover {
+  transform: translateY(-2px);
+  background-color: #fff176;
+  box-shadow: 0 7px 0 #f9a825;
+}
+
+.przycisk-menu:active {
+  transform: translateY(5px);
+  box-shadow: none;
+}
+
+.przycisk-menu.reset {
+  background-color: #f44336;
+  color: white;
+  box-shadow: 0 5px 0 #d32f2f;
+}
+
+.przycisk-menu.reset:hover {
+  background-color: #ef5350;
+  box-shadow: 0 7px 0 #d32f2f;
+}
+
+.przycisk-menu.reset:active {
+  transform: translateY(5px);
+  box-shadow: none;
+}
+
+.przycisk-menu.zasady {
+  background-color: #4caf50;
+  color: white;
+  box-shadow: 0 5px 0 #388e3c;
+}
+
+.przycisk-menu.zasady:hover {
+  background-color: #66bb6a;
+  box-shadow: 0 7px 0 #388e3c;
+}
+
+.przycisk-menu.zasady:active {
+  transform: translateY(5px);
+  box-shadow: none;
+}
