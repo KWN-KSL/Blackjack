@@ -68,19 +68,19 @@ export default function EkranGry({ saldo, ustawSaldo, powrotDoMenu, resetujGre }
     ustawKomunikat(`${tekstWyniku} Wypłata: $${lacznaWyplata}`);
   }, [ustawSaldo]);
 
-  const sprawdzBlackjackaPoUbezpieczeniu = useCallback((czyKupiono) => {
+  const sprawdzBlackjackaPoUbezpieczeniu = useCallback((czyKupiono, kwotaUbezpieczeniaWChwiliDecyzji = 0) => {
     const pKrupiera = obliczPunkty(rekaKrupiera);
     const pGracza = obliczPunkty(rekaGracza);
     
     if (pKrupiera === 21) {
       let wygranaUbezp = 0;
-      if (czyKupiono) wygranaUbezp = zakladUbezpieczenia * 2;
+      if (czyKupiono) wygranaUbezp = kwotaUbezpieczeniaWChwiliDecyzji * 2;
       zakonczGre(pKrupiera, pGracza, aktualnyZaklad, true, wygranaUbezp);
     } else {
       ustawKomunikat(czyKupiono ? 'Krupier nie ma Blackjacka. Ubezpieczenie przepada.' : 'Krupier nie ma Blackjacka. Gramy dalej.');
       ustawStanGry('wynikUbezpieczenia');
     }
-  }, [rekaKrupiera, rekaGracza, zakladUbezpieczenia, aktualnyZaklad, zakonczGre]);
+  }, [rekaKrupiera, rekaGracza, aktualnyZaklad, zakonczGre]);
 
   const startRundy = useCallback((zaklad) => {
     czyKoniecGryRef.current = false;
@@ -163,7 +163,7 @@ export default function EkranGry({ saldo, ustawSaldo, powrotDoMenu, resetujGre }
         ustawStanGry('turaKrupiera');
       } else {
         ustawStanGry('turaKrupiera');
-        ustawKomunikat('Tura Krupiera (Double)');
+        ustawKomunikat('Tura Krupiera');
       }
       ustawBlokadaDobierania(false);
     }, 800);
@@ -186,12 +186,12 @@ export default function EkranGry({ saldo, ustawSaldo, powrotDoMenu, resetujGre }
       if (saldo >= koszt) {
         ustawSaldo(s => s - koszt);
         ustawZakladUbezpieczenia(koszt);
-        sprawdzBlackjackaPoUbezpieczeniu(true);
+        sprawdzBlackjackaPoUbezpieczeniu(true, koszt);
       } else {
-        sprawdzBlackjackaPoUbezpieczeniu(false);
+        sprawdzBlackjackaPoUbezpieczeniu(false, 0);
       }
     } else {
-      sprawdzBlackjackaPoUbezpieczeniu(false);
+      sprawdzBlackjackaPoUbezpieczeniu(false, 0);
     }
   }, [aktualnyZaklad, saldo, ustawSaldo, sprawdzBlackjackaPoUbezpieczeniu]);
 
