@@ -18,21 +18,8 @@ export default function App() {
   const resetujGre = () => ustawSaldo(PUNKTY_STARTOWE);
 
   if (ekran === 'menu') {
-    return (
-      <EkranMenu 
-        saldo={saldo} 
-        graj={() => ustawEkran('gra')} 
-        resetuj={resetujGre} 
-      />
-    );
+    return (<EkranMenu saldo={saldo} graj={() => ustawEkran('gra')} resetuj={resetujGre}/>);
   }
 
-  return (
-    <EkranGry
-      saldo={saldo}
-      ustawSaldo={ustawSaldo}
-      powrotDoMenu={() => ustawEkran('menu')}
-      resetujGre={resetujGre}
-    />
-  );
+  return (<EkranGry saldo={saldo} ustawSaldo={ustawSaldo} powrotDoMenu={() => ustawEkran('menu')} resetujGre={resetujGre}/>);
 }

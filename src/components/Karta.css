@@ -16,19 +16,31 @@
   box-sizing: border-box;
 }
 
-.karta.czerwona { color: #d32f2f; }
-.karta.czarna { color: #212121; }
+.karta.czerwona {
+  color: #d32f2f;
+}
 
-.karta .wartosc { font-size: 2.2rem; }
-.karta .kolor { font-size: 1.8rem; }
+.karta.czarna {
+  color: #212121;
+}
+
+.karta .wartosc {
+  font-size: 2.2rem;
+}
+
+.karta .kolor {
+  font-size: 1.8rem;
+}
 
 .karta.ukryta {
   background-image: linear-gradient(135deg, #424242 25%, #616161 25%, #616161 50%, #424242 50%, #424242 75%, #616161 75%, #616161 100%);
   background-size: 40px 40px;
   border: 2px solid #212121;
 }
-.karta.ukryta .wartosc,
-.karta.ukryta .kolor { display: none; }
+
+.karta.ukryta .wartosc, .karta.ukryta .kolor {
+  display: none;
+}
 
 @keyframes animacjaPojawienia {
   from { opacity: 0; transform: scale(0.7) translateY(20px); }
@@ -59,8 +71,7 @@
   transform: rotateY(180deg);
 }
 
-.karta-przod,
-.karta-tyl {
+.karta-przod, .karta-tyl {
   position: absolute;
   width: 100%;
   height: 100%;

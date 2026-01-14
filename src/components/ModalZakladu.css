@@ -107,11 +107,25 @@ h2 {
   box-shadow: none;
 }
 
-.zeton-5 { background: #d32f2f; border-color: #fff; }
-.zeton-10 { background: #1976d2; border-color: #fff; }
-.zeton-25 { background: #388e3c; border-color: #fff; }
-.zeton-100 { background: #212121; border-color: #fff; }
-.zeton-500 { background: #7b1fa2; border-color: #fff; }
+.zeton-5 {
+  background: #d32f2f; border-color: #fff;
+}
+
+.zeton-10 {
+  background: #1976d2; border-color: #fff;
+}
+
+.zeton-25 {
+  background: #388e3c; border-color: #fff;
+}
+
+.zeton-100 {
+  background: #212121; border-color: #fff;
+}
+
+.zeton-500 {
+  background: #7b1fa2; border-color: #fff;
+}
 
 .akcje-zakladu {
   display: grid;

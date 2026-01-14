@@ -52,7 +52,7 @@ export default function EkranGry({ saldo, ustawSaldo, powrotDoMenu, resetujGre }
       tekstWyniku = 'Wygrałeś!';
       wyplata = stawka * 2;
     } else if (pKrupiera > pGracza) {
-      tekstWyniku = 'Przegrałeś! Krupier ma więcej.';
+      tekstWyniku = 'Przegrałeś! Krupier ma więcej punktów.';
       wyplata = 0;
     } else {
       tekstWyniku = 'Remis!';

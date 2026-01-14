@@ -12,6 +12,7 @@ export function stworzTalie() {
   return przetasujTalie(talia);
 }
 
+//Algorytm Fishera-Yatesa
 export function przetasujTalie(talia) {
   const nowa = [...talia];
   for (let i = nowa.length - 1; i > 0; i--) {
